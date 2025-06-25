@@ -1,0 +1,45 @@
+model:
+  name: "t5-small"
+  local_path: "pretrained_models/t5-small"  # Path to local model directory (relative to project root or absolute path, e.g. "models/t5-small" or "C:/path/to/models/t5-small")
+  pooling_strategy: "cls"
+  lora:
+    rank: 8
+    alpha: 32
+    dropout: 0.1
+    target_modules: ["q", "v"]
+    bias: "none"
+  loss_weights:
+    generation: 0.5
+    classification: 0.5
+
+training:
+  learning_rate: 3e-5
+  batch_size: 16
+  epochs: 10
+  gradient_accumulation_steps: 4
+  fp16: true
+  num_workers: 0
+  best_model_dir: "output/best_model"
+  checkpoint_dir: "output/checkpoints"
+  log_dir: "output/logs"  # directory for training logs
+  inference_log_dir: "output/inference_logs"  # directory for test logs
+  save_interval: 1  # save checkpoint every N epochs
+  eval_interval: 1  # evaluate on validation set every N epochs
+  early_stopping:
+    patience: 3     # number of epochs to wait before stopping
+    min_delta: 0.01 # minimum change to qualify as improvement
+
+data:
+  paths:
+    input: "data/data_th_scale.csv"
+    train: "data/train.csv"
+    val: "data/val.csv"
+    test: "data/test.csv"
+  preprocessing:
+    max_seq_length: 512
+    truncation_strategy: "right"  # options: right, left, middle
+  split:
+    train_size: 0.7
+    val_size: 0.15
+    test_size: 0.15
+    random_state: 42
