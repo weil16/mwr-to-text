@@ -1,6 +1,7 @@
 model:
   name: "t5-small"
-  local_path: "pretrained_models/t5-small"  # Path to local model directory (relative to project root or absolute path, e.g. "models/t5-small" or "C:/path/to/models/t5-small")
+  tokenizer_path: "custom_temperature_tokenizer"
+  model_path: "custom_temperature_model"  # Path to local model directory (relative to project root or absolute path, e.g. "models/t5-small" or "C:/path/to/models/t5-small")
   pooling_strategy: "cls"
   lora:
     rank: 8

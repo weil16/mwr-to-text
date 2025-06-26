@@ -3,6 +3,8 @@ __pycache__/
 *.pyo
 *.pyd
 
+*.txt
+
 bert-base-uncased/
 custom_temperature_model/
 custom_temperature_tokenizer/
