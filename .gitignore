@@ -4,6 +4,8 @@ __pycache__/
 *.pyd
 
 bert-base-uncased/
+custom_temperature_model/
+custom_temperature_tokenizer/
 google/
 debug_tools/
 optuna/
