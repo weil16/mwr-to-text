@@ -1,6 +1,3 @@
-# Standard library imports
-import warnings
-
 # Third-party imports
 import pandas as pd
 import torch
@@ -75,11 +72,17 @@ class MWRDataset(Dataset):
 
             # Combine based on truncation strategy
             if self.truncation_strategy == "right":
-                full_text = "MWR data: " + "; ".join(temp_text + medical_features + demographic_features)
+                full_text = "Generate medical assessment from following data: " + ", ".join(
+                    temp_text + medical_features + demographic_features
+                )
             elif self.truncation_strategy == "left":
-                full_text = "MWR data: " + "; ".join(demographic_features + medical_features + temp_text)
+                full_text = "Generate medical assessment from following data: " + ", ".join(
+                    demographic_features + medical_features + temp_text
+                )
             else:  # middle
-                full_text = "MWR data: " + "; ".join(medical_features + temp_text + demographic_features)
+                full_text = "Generate medical assessment from following data: " + ", ".join(
+                    medical_features + temp_text + demographic_features
+                )
             texts.append(full_text)
 
         return texts

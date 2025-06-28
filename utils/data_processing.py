@@ -27,7 +27,7 @@ def add_cycle_explain(df: pd.DataFrame) -> pd.DataFrame:
         - -1: irregular menstruation
         - -2: amenorrhea
         - -3: pregnancy
-        - Other values: "The menstrual cycle is [value] days"
+        - Other values: "[value]"
     """
 
     def map_cycle(value):
@@ -39,7 +39,7 @@ def add_cycle_explain(df: pd.DataFrame) -> pd.DataFrame:
         }
         if value in mapping:
             return mapping[value]
-        return f"The menstrual cycle is [DAY]{value}[/DAY] days"
+        return f"[DAY]{value}[/DAY]"
 
     if "Cycle" in df.columns:
         df["Cycle_explain"] = df["Cycle"].apply(map_cycle)
@@ -57,13 +57,13 @@ def add_day_explain(df: pd.DataFrame) -> pd.DataFrame:
 
     Mapping:
         - -1: not applicable
-        - Other values: "Day [value] of the menstrual cycle"
+        - Other values: "[value]"
     """
 
     def map_day(value):
         if value == -1:
             return "not applicable"
-        return f"Day [DAY]{value}[/DAY] of the menstrual cycle"
+        return f"[DAY]{value}[/DAY]"
 
     if "Day from the first day" in df.columns:
         df["Day_explain"] = df["Day from the first day"].apply(map_day)
